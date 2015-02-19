@@ -10,52 +10,57 @@ class Chisel
     **Food & Wine** this place has been packed every night."'
   end
   def parse(document)
-    document = document.split("\n")
-    document.map do |item|
-      case
-       when item[0..1] == "##"
-         puts "<h2>#{item[2..-1]}</h2>\n"
-       when item[0] == "#"
-         puts "<h1>#{item[1..-1]}</h1>\n"
-       when item[0] == "\""
-        puts "<p>\n#{item[1..-1]}\n#{document.last.chop}\n</p>"
-       else
-       end
-     end
+    lines = document.split("\n\n")
+    new_doc = lines.map do |line|
+      format_line(line)
+    end
+
+    new_doc
   end
 
-  def splitter(document)
-    document = document.split("\\n")
-  end
-
-  def h4_switch(item)
-    if item[0..3] == "####"
-      item.gsub(/####/, '<h4>') + "</h4>"
+  def format_line(line)
+    case
+    when line.start_with?("####")
+      format_tag(line, "h4")
+    when line.start_with?("###")
+      format_tag(line, "h3")
+    when line.start_with?("##")
+      format_tag(line, "h2")
+    when line.start_with?("#")
+      format_tag(line, "h1")
     else
+      format_tag(line, "p")
+        # line = line.split(" ")
+        # line.map do |words|
+        # format_paragraph_line(words)
+      #   end
+      # line.join(" ")
     end
   end
 
-  def h3_switch(item)
-    if item[0..2] == "###"
-      item.gsub(/###/, '<h3>') + "</h3>"
-    else
+  def format_paragraph_line(words)
+    case
+    when words.start_with?("**")
+      format_italic_tag(words,"em")
+    when words.start_with?("*")
+      format_strong_tag(words,"strong")
     end
   end
 
-  def h2_switch(item)
-    if item[0..1] == "##"
-      item.gsub(/##/, '<h2>') + "</h2>"
-    else
-    end
+  def format_italic_tag(words, tag)
+    words.delete!("**")
+    "<#{tag}>#{words}</#{tag}>"
   end
 
-  def h1_switch(item)
-    if item[0] == "#"
-      item.gsub(/#/, '<h1>') + "</h1>"
-    else
-    end
+  def format_strong_tag(words, tag)
+    words.delete!("*")
+    "<#{tag}>#{words}</#{tag}>"
   end
 
+  def format_tag(line, tag)
+    line.delete!("#")
+    "<#{tag}>#{line}</#{tag}>"
+  end
 end
 document = '# My Life in Desserts
 
