@@ -34,7 +34,6 @@ class ChiselTest < Minitest::Test
   end
 
   def test_input_with_hash_will_returned_wrapped_with_p
-    skip
     parser = Chisel.new
     assert "<p>\n\"You just have to try the cheesecake,\" he said. \"Ever since it appeared in
   Food &amp; Wine this place has been packed every night.\"\n</p>", parser.parse("\"You just have to try the cheesecake,\" he said. \"Ever since it appeared in
