@@ -10,18 +10,22 @@ class Chisel
     **Food & Wine** this place has been packed every night."'
   end
   def parse(document)
-    document = document.split(" ")
-    you_place = document.index("You")
+    document = document.split("\n")
     document.map do |item|
-      if item == "##"
-        puts "<h2>#{document[6..9].join(" ")}</h2>\n\n"
-      elsif item == "#"
-        puts "<h1>#{document[1..4].join(" ")}</h1>"
-      elsif item == "You"
-        puts "<p>\n#{document[10..-1].join(" ")}\n</p>"
-      else
-      end
-    end
+       if item[0..1] == "##"
+         puts "<h2>#{item[2..-1]}</h2>\n"
+       elsif item[0] == "#"
+         puts "<h1>#{item[1..-1]}</h1>\n"
+       elsif item == "\""
+         puts "<p>\n#{item[1..-2].join(" ")}\n</p>"
+       else
+         item
+       end
+     end
+  end
+
+  def splitter(document)
+    document = document.split("\\n")
   end
 
 end
@@ -33,4 +37,4 @@ document = '# My Life in Desserts
 **Food & Wine** this place has been packed every night."'
 
 parser = Chisel.new
-print parser.parse(document)
+puts parser.parse(document)
