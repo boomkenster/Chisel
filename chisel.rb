@@ -13,8 +13,10 @@ class Chisel
 def parse(document)
   if document[0..1] == "##"
     print "<h2>#{document[2..-1]}</h2>"
-  else document[0] == "#"
+  elsif document[0] == "#"
     print "<h1>#{document[1..-1]}</h1>"
+  else document[0] == "\" "
+    print "<p>\n#{document[1..-2]}\n</p>"
   end
 
 
