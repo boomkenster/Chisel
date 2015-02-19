@@ -39,4 +39,9 @@ class ChiselTest < Minitest::Test
   Food &amp; Wine this place has been packed every night.\"\n</p>", parser.parse("\"You just have to try the cheesecake,\" he said. \"Ever since it appeared in
   Food &amp; Wine this place has been packed every night.\"")
   end
+
+  def test_h4_swtich_works
+    parser = Chisel.new
+    assert = "<h4> hi </h4>", parser.h4_switch("####hi")
+  end
 end
