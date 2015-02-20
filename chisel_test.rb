@@ -16,7 +16,7 @@ class ChiselTest < Minitest::Test
 
   def test_parse_takes_a_parameter
     parser = Chisel.new
-    assert_equal ["hi"], parser.parse("hi")
+    assert_equal ["<p>hi</p>"], parser.parse("hi")
   end
 
   def test_input_with_hash_will_returned_wrapped_with_h1
@@ -46,13 +46,4 @@ class ChiselTest < Minitest::Test
     assert_equal = "<h1> hi </h1>", parser.parse("#hi")
   end
 
-  
-
-  def test_input_with_hash_will_returned_wrapped_with_p
-    skip
-    parser = Chisel.new
-    assert_equal "<p>\n\"You just have to try the cheesecake,\" he said. \"Ever since it appeared in
-  Food &amp; Wine this place has been packed every night.\"\n</p>", parser.parse("\"You just have to try the cheesecake,\" he said. \"Ever since it appeared in
-  Food &amp; Wine this place has been packed every night.\"")
-  end
 end

@@ -1,14 +1,5 @@
 class Chisel
 
-
-  def initialize
-    @document = '# My Life in Desserts
-
-    ## Chapter 1: The Beginning
-
-    "You just *have* to try the cheesecake," he said. "Ever since it appeared in
-    **Food & Wine** this place has been packed every night."'
-  end
   def parse(document)
     lines = document.split("\n\n")
     new_doc = lines.map do |line|
@@ -67,10 +58,9 @@ document = '# My Life in Desserts
 ## Chapter 1: The Beginning
 
 "You just *have* to try the cheesecake," he said. "Ever since it appeared in
-**Food & Wine** this place has been packed every night."'
+**Food & Wine** this place has been packed every night.
+
+Lets see if this is a new p"'
 
 parser = Chisel.new
 puts parser.parse(document)
-
-
-#if there is quote put a <p> before until the last quote
